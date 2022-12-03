@@ -1,2 +1,2 @@
 # HAS
-Heart Attack System
+Heart Attack Prediction System
