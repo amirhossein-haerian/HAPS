@@ -1,2 +1,2 @@
-# HAS
+# HAPS
 Heart Attack Prediction System
