@@ -16,13 +16,13 @@ if __name__ == "__main__":
 dirname = os.path.abspath('')
 
 # Loading our models
-encoderModel = joblib.load(os.path.join(dirname, "models/encoderModel.pkl")) 
+encoderModel = joblib.load(os.path.join(dirname, "Back-End/models/encoderModel.pkl")) 
 print ("enodelModel loaded")
-scalerModel = joblib.load(os.path.join(dirname, "models/scalerModel.pkl")) 
+scalerModel = joblib.load(os.path.join(dirname, "Back-End/models/scalerModel.pkl")) 
 print ("scalerModel loaded")
-X_columns = joblib.load(os.path.join(dirname, "models/X_columns.pkl")) 
+X_columns = joblib.load(os.path.join(dirname, "Back-End/models/X_columns.pkl")) 
 print ("X_columns loaded")
-KNN = joblib.load(os.path.join(dirname, "models/KNN.pkl")) 
+KNN = joblib.load(os.path.join(dirname, "Back-End/models/KNN.pkl")) 
 print ("KNN loaded")
 
 application = Flask(__name__)
