@@ -13,6 +13,7 @@ import { StyledBox } from "./StyledComponents";
 
 import TextInput from "./TextInput";
 import OptionInput from "./OptionInput";
+import SliderInput from "./SliderInput";
 
 function StepperUI() {
   const [activeStep, setActiveStep] = useState(0);
@@ -30,6 +31,9 @@ function StepperUI() {
   });
 
   const handleNext = () => {
+    if (activeStep === formList.length()) {
+      
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -45,20 +49,33 @@ function StepperUI() {
       <Stepper activeStep={activeStep} orientation="vertical">
         {formList.map((step, index) => (
           <Step key={step.name}>
-            <StepLabel>{step.name}</StepLabel>
+            <StepLabel>
+              {step.name} {values[step.name] && `: ${values[step.name]}`}
+            </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
               {step.type === "text" ? (
-                <TextInput
+                <SliderInput
                   value={values[step.name]}
                   label={step.name}
+                  min={step.min}
+                  max={step.max}
                   changeValue={(value) => {
                     let newValues = { ...values };
                     newValues[step.name] = value;
                     setValues(newValues);
                   }}
-                ></TextInput>
+                ></SliderInput>
               ) : (
+                // <TextInput
+                //   value={values[step.name]}
+                //   label={step.name}
+                //   changeValue={(value) => {
+                //     let newValues = { ...values };
+                //     newValues[step.name] = value;
+                //     setValues(newValues);
+                //   }}
+                // ></TextInput>
                 <OptionInput
                   options={step.options}
                   value={values[step.name]}
@@ -71,7 +88,7 @@ function StepperUI() {
               )}
               <StyledBox sx={{ mb: 2 }}>
                 <div>
-                  <Button disabled={!values[step.name]} variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
+                  <Button disabled={!values[step.name] && values[step.name] !== 0} variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
                     {index === formList.length - 1 ? "Finish" : "Continue"}
                   </Button>
                   <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>

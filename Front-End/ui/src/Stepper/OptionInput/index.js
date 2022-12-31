@@ -8,9 +8,9 @@ function OptionInput(props) {
   let { options, value, changeValue } = props;
   return (
     <StyledFormControl>
-      <RadioGroup value={value} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+      <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
         {options.map((option) => (
-          <FormControlLabel key={option.name} value={option.value} control={<Radio />} label={option.name} onChange={() => changeValue(option.value)}></FormControlLabel>
+          <FormControlLabel key={option.name} value={option.value} checked={value === option.value} control={<Radio />} label={option.name} onChange={() => changeValue(option.value)}></FormControlLabel>
         ))}
       </RadioGroup>
     </StyledFormControl>
