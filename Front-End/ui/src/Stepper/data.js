@@ -1,4 +1,4 @@
-const data = [
+const formList = [
   {
     name: "Age",
     type: "number",
@@ -136,3 +136,5 @@ const data = [
     description: "the slope of the peak exercise ST segment",
   },
 ];
+
+export { formList };

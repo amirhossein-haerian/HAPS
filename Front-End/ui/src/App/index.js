@@ -2,6 +2,8 @@ import { AppContainer, Title, ImgContainer, Img, Description } from "./StyledCom
 
 import heartImg from "../Assests/image/heart.svg";
 
+import StepperUI from '../Stepper'
+
 function App() {
   return (
     <AppContainer>
@@ -10,6 +12,7 @@ function App() {
         <Img src={heartImg} alt="heart"></Img>
       </ImgContainer>
       <Description>Fill out the information below, and we will predict for you whether you have heart failure or not:</Description>
+      <StepperUI></StepperUI>
     </AppContainer>
   );
 }
