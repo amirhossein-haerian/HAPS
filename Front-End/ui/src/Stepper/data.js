@@ -1,7 +1,7 @@
 const formList = [
   {
     name: "Age",
-    type: "number",
+    type: "text",
     rule: ">0",
     description: "age of the patient",
   },
@@ -45,13 +45,13 @@ const formList = [
   },
   {
     name: "RestingBP",
-    type: "number",
+    type: "text",
     rule: ">0",
     description: "resting blood pressure [mm Hg]",
   },
   {
     name: "Cholesterol",
-    type: "number",
+    type: "text",
     rule: ">0",
     description: "serum cholesterol [mm/dl]",
   },
@@ -91,7 +91,7 @@ const formList = [
   },
   {
     name: "MaxHR",
-    type: "number",
+    type: "text",
     rule: ">60 <202",
     description: "maximum heart rate achieved",
   },
@@ -112,7 +112,7 @@ const formList = [
   },
   {
     name: "Oldpeak",
-    type: "number",
+    type: "text",
     rule: ">0",
     description: "",
   },

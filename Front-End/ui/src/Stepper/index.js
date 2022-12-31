@@ -4,14 +4,30 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
+import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 
 import { formList } from "./data";
 
 import { StyledBox } from "./StyledComponents";
 
+import TextInput from "./TextInput";
+
 function StepperUI() {
   const [activeStep, setActiveStep] = useState(0);
+  const [values, setValues] = useState({
+    Age: "",
+    Sex: "",
+    ChestPainType: "",
+    RestingBP: "",
+    Cholesterol: "",
+    FastingBS: "",
+    RestingBP: "",
+    MaxHR: "",
+    ExerciseAngina: "",
+    Oldpeak: "",
+    ST_Slope: "",
+  });
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -32,16 +48,27 @@ function StepperUI() {
             <StepLabel>{step.name}</StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
-              {/* <Box sx={{ mb: 2 }}>
+              {step.type === "text" ? (
+                <TextInput
+                  value={values[step.name]}
+                  label={step.name}
+                  changeValue={(value) => {
+                    let newValues = { ...values };
+                    newValues[step.name] = value;
+                    setValues(newValues);
+                  }}
+                ></TextInput>
+              ) : null}
+              <StyledBox sx={{ mb: 2 }}>
                 <div>
-                  <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                    {index === steps.length - 1 ? "Finish" : "Continue"}
+                  <Button disabled={!values[step.name]} variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
+                    {index === formList.length - 1 ? "Finish" : "Continue"}
                   </Button>
                   <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
                     Back
                   </Button>
                 </div>
-              </Box> */}
+              </StyledBox>
             </StepContent>
           </Step>
         ))}
