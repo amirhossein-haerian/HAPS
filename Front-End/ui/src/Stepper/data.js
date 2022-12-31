@@ -4,6 +4,8 @@ const formList = [
     type: "text",
     rule: ">0",
     description: "age of the patient",
+    min: 1,
+    max: 120
   },
   {
     name: "Sex",
@@ -48,12 +50,16 @@ const formList = [
     type: "text",
     rule: ">0",
     description: "resting blood pressure [mm Hg]",
+    min: 0,
+    max: 200
   },
   {
     name: "Cholesterol",
     type: "text",
     rule: ">0",
     description: "serum cholesterol [mm/dl]",
+    min: 0,
+    max: 600
   },
   {
     name: "FastingBS",
@@ -94,6 +100,8 @@ const formList = [
     type: "text",
     rule: ">60 <202",
     description: "maximum heart rate achieved",
+    min: 60,
+    max: 202
   },
   {
     name: "ExerciseAngina",
@@ -115,6 +123,8 @@ const formList = [
     type: "text",
     rule: ">0",
     description: "",
+    min: 0,
+    max: 6
   },
   {
     name: "ST_Slope",

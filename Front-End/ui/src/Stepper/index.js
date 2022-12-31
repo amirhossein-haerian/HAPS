@@ -4,7 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { formList } from "./data";
@@ -12,6 +12,7 @@ import { formList } from "./data";
 import { StyledBox } from "./StyledComponents";
 
 import TextInput from "./TextInput";
+import OptionInput from "./OptionInput";
 
 function StepperUI() {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,7 +20,6 @@ function StepperUI() {
     Age: "",
     Sex: "",
     ChestPainType: "",
-    RestingBP: "",
     Cholesterol: "",
     FastingBS: "",
     RestingBP: "",
@@ -58,7 +58,17 @@ function StepperUI() {
                     setValues(newValues);
                   }}
                 ></TextInput>
-              ) : null}
+              ) : (
+                <OptionInput
+                  options={step.options}
+                  value={values[step.name]}
+                  changeValue={(value) => {
+                    let newValues = { ...values };
+                    newValues[step.name] = value;
+                    setValues(newValues);
+                  }}
+                ></OptionInput>
+              )}
               <StyledBox sx={{ mb: 2 }}>
                 <div>
                   <Button disabled={!values[step.name]} variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
