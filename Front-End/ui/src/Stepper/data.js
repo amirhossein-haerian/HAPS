@@ -3,9 +3,9 @@ const formList = [
     name: "Age",
     type: "text",
     rule: ">0",
-    description: "age of the patient",
+    description: "The age of the patient, in years.",
     min: 1,
-    max: 120
+    max: 120,
   },
   {
     name: "Sex",
@@ -20,7 +20,7 @@ const formList = [
         value: "F",
       },
     ],
-    description: "sex of the patient",
+    description: "The patient's gender, male or female.",
   },
   {
     name: "ChestPainType",
@@ -43,38 +43,42 @@ const formList = [
         value: "ASY",
       },
     ],
-    description: "chest pain type",
+    description: `The type of chest pain experienced by the patient:
+    i. TA: Typical Angina
+    ii. ATA: Atypical Angina
+    iii. NAP: Non-Anginal Pain
+    iv. ASY: Asymptomatic`,
   },
   {
     name: "RestingBP",
     type: "text",
     rule: ">0",
-    description: "resting blood pressure [mm Hg]",
+    description: "The patient's resting blood pressure (mmHg).",
     min: 0,
-    max: 200
+    max: 200,
   },
   {
     name: "Cholesterol",
     type: "text",
     rule: ">0",
-    description: "serum cholesterol [mm/dl]",
+    description: "The patient's serum cholesterol (mg/dl).",
     min: 0,
-    max: 600
+    max: 600,
   },
   {
     name: "FastingBS",
     type: "options",
     options: [
       {
-        name: "FastingBS > 120 mg/dl",
-        value: "1",
+        name: "glucose > 120 mg/dl",
+        value: 1,
       },
       {
-        name: "FastingBS <= 120 mg/dl",
-        value: "0",
+        name: "otherwise",
+        value: 0,
       },
     ],
-    description: "fasting blood sugar",
+    description: "The patient's fasting blood sugar.",
   },
   {
     name: "RestingECG",
@@ -93,15 +97,18 @@ const formList = [
         value: "LVH",
       },
     ],
-    description: "resting electrocardiogram results",
+    description: `Resting electrocardiogram results:
+    i. Normal
+    ii. ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV)
+    iii. LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria`,
   },
   {
     name: "MaxHR",
     type: "text",
     rule: ">60 <202",
-    description: "maximum heart rate achieved",
+    description: "Maximum heart rate achieved, beats per minute.",
     min: 60,
-    max: 202
+    max: 202,
   },
   {
     name: "ExerciseAngina",
@@ -116,34 +123,37 @@ const formList = [
         value: "N",
       },
     ],
-    description: "exercise-induced angina",
+    description: "Exercise-induced angina, yes or no.",
   },
   {
     name: "Oldpeak",
     type: "text",
     rule: ">0",
-    description: "",
+    description: "Numeric measure of ST depression induced by exercise relative to rest.",
     min: 0,
-    max: 6
+    max: 6,
   },
   {
     name: "ST_Slope",
     type: "options",
     options: [
       {
-        name: "Up",
-        value: "upsloping",
+        name: "upsloping",
+        value: "Up",
       },
       {
         name: "Flat",
-        value: "flat",
+        value: "Flat",
       },
       {
         name: "downsloping",
         value: "Down",
       },
     ],
-    description: "the slope of the peak exercise ST segment",
+    description: `The slope of the peak exercise ST segment.
+    i. Up: upsloping
+    ii. Flat
+    iii. Down: downsloping`,
   },
 ];
 

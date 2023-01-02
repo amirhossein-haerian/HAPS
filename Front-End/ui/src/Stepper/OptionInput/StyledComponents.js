@@ -3,7 +3,6 @@ import { colors } from "../../Assests/const_values";
 import FormControl from "@mui/material/FormControl";
 
 const StyledFormControl = styled(FormControl)`
-  margin: 20px auto !important;
   /* color: ${colors.white1}; */
 
   & .MuiInputLabel-formControl {

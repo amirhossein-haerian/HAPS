@@ -9,9 +9,9 @@ import Typography from "@mui/material/Typography";
 
 import { formList } from "./data";
 
-import { StyledBox } from "./StyledComponents";
+import { StyledBox, Result } from "./StyledComponents";
 
-import TextInput from "./TextInput";
+// import TextInput from "./TextInput";
 import OptionInput from "./OptionInput";
 import SliderInput from "./SliderInput";
 
@@ -30,9 +30,20 @@ function StepperUI() {
     ST_Slope: "",
   });
 
+  const [result, setResult] = useState(null);
+
   const handleNext = () => {
-    if (activeStep === formList.length()) {
-      
+    if (activeStep === formList.length - 1) {
+      fetch("http://localhost:3001/predict", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([values]),
+      })
+        .then((res) => res.json())
+        .then((res) => setResult(res.prediction));
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -43,6 +54,8 @@ function StepperUI() {
 
   const handleReset = () => {
     setActiveStep(0);
+    setValues({ ...values, Age: "", Sex: "", ChestPainType: "", Cholesterol: "", FastingBS: "", RestingBP: "", MaxHR: "", ExerciseAngina: "", Oldpeak: "", ST_Slope: "" });
+    setResult(null);
   };
   return (
     <StyledBox sx={{ maxWidth: 400 }}>
@@ -50,7 +63,8 @@ function StepperUI() {
         {formList.map((step, index) => (
           <Step key={step.name}>
             <StepLabel>
-              {step.name} {values[step.name] && `: ${values[step.name]}`}
+              {step.name}
+              {values[step.name] && `: ${values[step.name]}`}
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
@@ -100,6 +114,16 @@ function StepperUI() {
           </Step>
         ))}
       </Stepper>
+      {result && (
+        <>
+          <Result result={result}>{result === "0" ? "fortunately, there is low probability for you to have heart failure" : "unfortunately, there is high probability for you to have heart failure. you must visit a doctor"}</Result>
+          <StyledBox sx={{ my: 6 }} style={{textAlign: "center"}}>
+            <div>
+              <Button variant="contained" onClick={handleReset}>Reset</Button>
+            </div>
+          </StyledBox>
+        </>
+      )}
     </StyledBox>
   );
 }
