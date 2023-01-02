@@ -7,11 +7,13 @@ import traceback
 import pandas as pd
 import numpy as np
 
+from flask_cors import CORS, cross_origin
+
 if __name__ == "__main__":
  try:
     port = int(sys.argv[1])
  except:
-    port = 3000
+    port = 3001
 
 dirname = os.path.abspath('')
 
@@ -26,8 +28,12 @@ KNN = joblib.load(os.path.join(dirname, "Back-End/models/KNN.pkl"))
 print ("KNN loaded")
 
 application = Flask(__name__)
+application.config['SECRET_KEY'] = 'secret key'
+application.config['CORS_HEADERS'] = 'Content-Type'
 
 @application.route("/predict", methods=["POST"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+
 def predict():
     try:
         # Converting our data into DataFrame
