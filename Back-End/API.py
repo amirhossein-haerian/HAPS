@@ -31,7 +31,7 @@ application = Flask(__name__)
 application.config['SECRET_KEY'] = 'secret key'
 application.config['CORS_HEADERS'] = 'Content-Type'
 
-@application.route("/predict", methods=["POST"])
+@application.route("/predict", methods=["POST"]) # defining a path
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 
 def predict():
@@ -45,6 +45,8 @@ def predict():
         # encoding the categorical data into numerical data
         for c in list(encoderModel.keys()):    
             req_df[c] = encoderModel[c].transform(req_df[c])
+
+        print(req_df)
 
         # standardize our data
         mock_data_df_numeric = req_df[num_col]

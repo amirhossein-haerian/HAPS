@@ -34,6 +34,7 @@ function StepperUI() {
 
   const handleNext = () => {
     if (activeStep === formList.length - 1) {
+      console.log(JSON.parse(JSON.stringify([values])))
       fetch("http://localhost:3001/predict", {
         method: "POST",
         headers: {
@@ -54,7 +55,7 @@ function StepperUI() {
 
   const handleReset = () => {
     setActiveStep(0);
-    setValues({ ...values, Age: "", Sex: "", ChestPainType: "", Cholesterol: "", FastingBS: "", RestingBP: "", MaxHR: "", ExerciseAngina: "", Oldpeak: "", ST_Slope: "" });
+    setValues({Age: "", Sex: "", ChestPainType: "", Cholesterol: "", FastingBS: "", RestingBP: "", MaxHR: "", ExerciseAngina: "", Oldpeak: "", ST_Slope: "" });
     setResult(null);
   };
   return (
@@ -64,7 +65,7 @@ function StepperUI() {
           <Step key={step.name}>
             <StepLabel>
               {step.name}
-              {values[step.name] && `: ${values[step.name]}`}
+              {(values[step.name] || values[step.name] === 0) && `: ${values[step.name]}`}
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
@@ -74,6 +75,7 @@ function StepperUI() {
                   label={step.name}
                   min={step.min}
                   max={step.max}
+                  step={step.name === "Oldpeak" ? 0.1 : null}
                   changeValue={(value) => {
                     let newValues = { ...values };
                     newValues[step.name] = value;
