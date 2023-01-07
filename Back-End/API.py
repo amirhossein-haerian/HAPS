@@ -20,8 +20,8 @@ dirname = os.path.abspath('')
 # Loading our models
 encoderModel = joblib.load(os.path.join(dirname, "Back-End/models/encoderModel.pkl")) 
 print ("enodelModel loaded")
-ohe = joblib.load(os.path.join(dirname, "Back-End/models/ohe.pkl")) 
-print ("ohe loaded")
+one_hot_encoder_model = joblib.load(os.path.join(dirname, "Back-End/models/one_hot_encoder_model.pkl")) 
+print ("one_hot_encoder_model loaded")
 scalerModel = joblib.load(os.path.join(dirname, "Back-End/models/scalerModel.pkl")) 
 print ("scalerModel loaded")
 cat_columns = joblib.load(os.path.join(dirname, "Back-End/models/cat_columns.pkl")) 
@@ -45,14 +45,11 @@ def predict():
         num_col = req_df.describe().columns
 
         # encoding the categorical data into numerical data
-        # for c in list(encoderModel.keys()):    
-        #     req_df[c] = encoderModel[c].transform(req_df[c])
 
-        cat_ohe = ohe.transform(req_df[cat_columns])
-        ohe_df = pd.DataFrame(cat_ohe, columns = ohe.get_feature_names(input_features = cat_columns))
-        req_df = pd.concat([ohe_df, req_df], axis=1).drop(columns = cat_columns, axis=1)
+        transformed_one_hot_encoder_model = one_hot_encoder_model.transform(req_df[cat_columns])
+        one_hot_encoder_df = pd.DataFrame(transformed_one_hot_encoder_model, columns = one_hot_encoder_model.get_feature_names(input_features = cat_columns))
+        req_df = pd.concat([one_hot_encoder_df, req_df], axis=1).drop(columns = cat_columns, axis=1)
 
-        # req_df = pd.get_dummies(req_df, drop_first=True)
 
         # standardize our data
         mock_data_df_numeric = req_df[num_col]
